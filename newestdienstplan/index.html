@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dienstplansystem</title>
+    
+</head>
+<body>
+    <h3>Dienstplansystem</h3>
+    
+    <h2>Dienstplan</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Schicht</th>
+                <th>Mitarbeiter</th>
+                <th>Stunden</th>
+                <th>Löschen</th>
+            </tr>
+            <link rel="stylesheet" href="style.css">
+        </thead>
+        <tbody id="dienstplan">
+            <!-- Hier werden die Dienstplan-Elemente eingefügt -->
+        </tbody>
+    </table>
+    
+    <h4>Eintrag hinzufügen</h4>
+    <form id="dienstplan-form">
+        <label for="datum">Datum:</label>
+        <input type="date" id="datum" required>
+        <label for="schicht">Schicht:</label>
+        <input type="text" id="schicht" required>
+        <label for="mitarbeiter">Mitarbeiter:</label>
+        <input type="text" id="mitarbeiter" required>
+        <label for="stunden">Stunden:</label>
+        <input type="text" id="stunden" required>
+        <input type="submit" value="Hinzufügen">
+    </form>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const dienstplanForm = document.getElementById("dienstplan-form");
+            const dienstplanTable = document.getElementById("dienstplan");
+            let gesamtStunden = 0;
+
+            dienstplanForm.addEventListener("submit", function(event) {
+                event.preventDefault();
+                const datum = document.getElementById("datum").value;
+                const schicht = document.getElementById("schicht").value;
+                const mitarbeiter = document.getElementById("mitarbeiter").value;
+                const stunden = parseFloat(document.getElementById("stunden").value.replace(',', '.'));
+
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `
+                    <td>${datum}</td>
+                    <td>${schicht}</td>
+                    <td>${mitarbeiter}</td>
+                    <td>${stunden.toFixed(1)} Stunden</td>
+                    <td class="delete-button">X</td>
+                `;
+
+                dienstplanTable.appendChild(newRow);
+                dienstplanForm.reset();
+
+                // Stundensumme aktualisieren
+                gesamtStunden += stunden;
+                updateStundensumme();
+            });
+
+            dienstplanTable.addEventListener("click", function(e) {
+                if (e.target.classList.contains("delete-button")) {
+                    const row = e.target.parentNode;
+                    const stundenCell = row.querySelector("td:nth-child(4)");
+                    const stunden = parseFloat(stundenCell.innerText.replace(' Stunden', '').replace(',', '.'));
+                    gesamtStunden -= stunden;
+                    dienstplanTable.removeChild(row);
+                    updateStundensumme();
+                }
+            });
+
+            function updateStundensumme() {
+                const summeRow = document.getElementById("summe-row");
+                if (summeRow) {
+                    summeRow.querySelector("td:nth-child(4)").textContent = gesamtStunden.toFixed(1).replace('.', ',') + " Stunden";
+                } else {
+                    const newSummeRow = document.createElement("tr");
+                    newSummeRow.setAttribute("id", "summe-row");
+                    newSummeRow.innerHTML = `
+                        <td>Summe:</td>
+                        <td></td>
+                        <td></td>
+                        <td>${gesamtStunden.toFixed(1).replace('.', ',')} Stunden</td>
+                        <td></td>
+                    `;
+                    dienstplanTable.insertBefore(newSummeRow, dienstplanTable.firstChild);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

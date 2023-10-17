@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Hellgrau */
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    background-color: #b0c4de; /* Hellblau */
+    color: #333; /* Dunkelgrau */
+    padding: 20px;
+    text-align: center;
+}
+
+h2 {
+    background-color: #eee; /* Helleres Grau */
+    color: #333; /* Dunkelgrau */
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Schatten hinzugefügt */
+}
+
+table, th, td {
+    border: 1px solid #ccc; /* Hellgrau */
+}
+
+th, td {
+    padding: 6px; /* Kleinere Zellen */
+    text-align: center;
+}
+
+th {
+    background-color: #b0c4de; /* Hellblau */
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #eee; /* Helleres Grau */
+}
+
+.add-button {
+    margin: 10px 0;
+}
+
+.delete-button {
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+}
+
+.delete-button:hover {
+    text-decoration: underline;
+}
+
+#dienstplan-form {
+    background-color: #eee; /* Helleres Grau */
+    color: #333; /* Dunkelgrau */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Schatten hinzugefügt */
+}
+
+#dienstplan-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+#dienstplan-form input[type="date"],
+#dienstplan-form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc; /* Hellgrau */
+    border-radius: 5px;
+}
+
+#dienstplan-form input[type="number"]::-webkit-inner-spin-button,
+#dienstplan-form input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#dienstplan-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc; /* Hellgrau */
+    border-radius: 5px;
+}
+
+#dienstplan-form input[type="submit"] {
+    background-color: #b0c4de; /* Hellblau */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#dienstplan-form input[type="submit"]:hover {
+    background-color: #304c80; /* Dunkleres Blau */
+}
+
+#summe-row {
+    font-weight: bold;
+    color: black;
+}
+
